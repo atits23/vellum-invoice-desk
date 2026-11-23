@@ -6,11 +6,11 @@ This assignment implementation includes a marketing website, verified accounts, 
 
 Repository: https://github.com/atits23/vellum-invoice-desk
 
-Public deployment: being verified; see [deployment instructions](docs/DEPLOYMENT.md). Do not interpret a configured deployment as a verified live application.
+Public deployment: https://vellum-invoice-desk-atits23.onrender.com — live; final account/workflow verification in progress. See [deployment instructions](docs/DEPLOYMENT.md).
 
 ## Run locally
 
-Requires Node 22+, Python 3.12+, Tesseract (English/Hindi) and Poppler for scans. On the prepared Windows workspace:
+Requires Node 22.19+ (including Lighthouse tooling), Python 3.12+, Tesseract (English/Hindi) and Poppler for scans. On the prepared Windows workspace:
 
 ```powershell
 cd E:\Zamp
