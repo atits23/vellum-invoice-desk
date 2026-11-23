@@ -35,6 +35,8 @@ The 200 MB guard test simulates the byte length at the service boundary without 
 
 ## Screenshots
 
+Fresh-browser live verification is recorded in [live role results](../reports/live-roles.json). It checked login/logout, the 350-document report, uploader ownership, reviewer restrictions, a public receipt upload and admin assignment. Live captures: [Admin](qa/live/admin.png), [Reviewer](qa/live/reviewer.png), [Uploader](qa/live/uploader.png), [source and decision](qa/live/uploader-run.png). These images contain only fictional accounts and a public dataset receipt.
+
 [Admin](qa/admin-dashboard.png), [admin controls](qa/admin-controls.png), [Reviewer](qa/reviewer-dashboard.png), [review queue](qa/reviewer-queue.png), [Uploader](qa/uploader-dashboard.png), [submissions](qa/admin-submissions.png), [upload](qa/invoices.png), [procurement](qa/procurement.png), [reports](qa/evaluation.png), [settings](qa/settings.png). [Side-by-side gallery](qa/index.html) compares the shared tokens with marketing. These are local browser test artifacts; live verification is recorded separately.
 
 ## Known limitations and mocks

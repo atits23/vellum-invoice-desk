@@ -1,0 +1,30 @@
+{
+  "verified_at": "2026-11-23T08:43:56.390Z",
+  "url": "https://vellum-invoice-desk-atits23.onrender.com",
+  "results": [
+    {
+      "role": "Uploader",
+      "login": true,
+      "report": true,
+      "permissions": true,
+      "logout": true,
+      "consoleErrors": []
+    },
+    {
+      "role": "Reviewer",
+      "login": true,
+      "report": true,
+      "permissions": true,
+      "logout": true,
+      "consoleErrors": []
+    },
+    {
+      "role": "Admin",
+      "login": true,
+      "report": true,
+      "permissions": true,
+      "logout": true,
+      "consoleErrors": []
+    }
+  ]
+}
