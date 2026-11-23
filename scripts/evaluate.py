@@ -37,7 +37,15 @@ def evaluate(output='evaluation'):
                 elif key.endswith('_date'):passed=normalize_date(str(candidate))==normalize_date(value)
                 else:passed=norm(candidate)==norm(value)
                 fields.setdefault(key,{'correct':0,'total':0});fields[key]['correct']+=int(passed);fields[key]['total']+=1;correct[key]=passed
-            results.append({'file':row['file'],'expected':expected,'actual':actual,'mode':row['mode'],'group':row['group'],'duration_ms':round(duration,2),'reason':reason,'fields':correct,'ocr_confidence':run['metadata'].get('ocr_confidence')})
+            misses=[k for k,v in correct.items() if not v]
+            causes=[]
+            if misses:
+                missing=[k for k in misses if not extracted.get(k)]
+                if missing:causes.append('No extracted candidate for '+', '.join(missing))
+                differing=[k for k in misses if extracted.get(k)]
+                if differing:causes.append('Extracted value disagrees with independent label: '+', '.join(differing))
+                if run['metadata'].get('ocr_confidence',1) is not None and run['metadata'].get('ocr_confidence',1)<.85:causes.append('OCR word confidence below 85%; visual reading needed')
+            results.append({'file':row['file'],'expected':expected,'actual':actual,'mode':'ocr' if run['metadata'].get('ocr_confidence') is not None else 'text','group':row['group'],'duration_ms':round(duration,2),'reason':reason,'fields':correct,'field_misses':misses,'causes':causes,'ground_truth':truth,'extracted':{k:extracted.get(k) for k in truth},'ocr_confidence':run['metadata'].get('ocr_confidence')})
         if (index+1)%10==0:print(f'Evaluated {index+1}/{len(rows)}',flush=True)
     n=len(results);safe=sum(r['expected']!='APPROVED' for r in results);false_approves=sum(r['actual']=='APPROVED' and r['expected']!='APPROVED' for r in results)
     routing={}
@@ -51,6 +59,9 @@ def evaluate(output='evaluation'):
     for mode in ['ocr','text']:
         subset=[r for r in results if r['mode']==mode];conf=[r['ocr_confidence'] for r in subset if r['ocr_confidence'] is not None]
         report['modes'][mode]={'count':len(subset),'decision_accuracy':sum(r['actual']==r['expected'] for r in subset)/len(subset) if subset else None,'mean_ocr_confidence':statistics.mean(conf) if conf else None,'field_accuracy':sum(sum(r['fields'].values()) for r in subset)/max(1,sum(len(r['fields']) for r in subset))}
+    report['scope']='350-file hard regression corpus: 100 public CORD receipt photographs with upstream human annotations, three public invoice fixtures, and independently specified synthetic/layout/degradation cases. Correlated variants are not independent real-world samples. Unreadable fields and held-out layouts remain limitations.'
+    report['worst_failures']=sorted([r for r in results if r['field_misses'] or r['actual']!=r['expected']],key=lambda r:(r['actual']=='APPROVED' and r['expected']!='APPROVED',r['actual']!=r['expected'],len(r['field_misses'])),reverse=True)[:10]
+    report['field_accuracy']=sum(v['correct'] for v in fields.values())/max(1,sum(v['total'] for v in fields.values()))
     out=ROOT/'reports';out.mkdir(exist_ok=True);(out/(output+'.json')).write_text(json.dumps(report,indent=2),encoding='utf-8')
     table=''.join('<tr>'+''.join('<td>'+html.escape(str(r[k]))+'</td>' for k in ['file','expected','actual','duration_ms','reason'])+'</tr>' for r in results)
     (out/(output+'.html')).write_text('<!doctype html><html lang="en"><meta charset="utf-8"><title>Vellum evaluation</title><style>body{font:16px system-ui;margin:40px;color:#222}table{border-collapse:collapse}td,th{border:1px solid #ddd;padding:10px}pre{white-space:pre-wrap}</style><h1>Vellum evaluation</h1><p>'+html.escape(report['scope'])+'</p><pre>'+html.escape(json.dumps({k:v for k,v in report.items() if k not in ['results','failures']},indent=2))+'</pre><table><tr><th>File</th><th>Expected</th><th>Actual</th><th>ms</th><th>Reason</th></tr>'+table+'</table></html>',encoding='utf-8')

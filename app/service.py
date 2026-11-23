@@ -152,11 +152,27 @@ class Service:
             self.store.event(run_id,'decision',decision['status'] + ': ' + decision['next_action'],c,{**detail,'outputs':decision['status']})
         return self.store.get(run_id)
 
-    def reject(self, run_id, note):
+    def override(self,run_id,status,note,actor):
+        if not isinstance(note,str) or not 5<=len(note.strip())<=2000:raise ValueError('An audit note of 5 to 2000 characters is required.')
+        if status not in ('APPROVED','REVIEW','REJECTED'):raise ValueError('Invalid override decision.')
+        with self.store.connect() as c:
+            c.execute('BEGIN IMMEDIATE')
+            row=c.execute('SELECT * FROM runs WHERE id=?',(run_id,)).fetchone()
+            if not row or row['status'] in ('QUEUED','PROCESSING'):raise ValueError('Wait for processing to finish before overriding.')
+            original=json.loads(row['decision']);po=original.get('po');amount=original.get('total_minor')
+            if status=='APPROVED' and (not po or not amount or amount<=0):raise ValueError('An approval requires a matched PO and a valid positive amount. Correct and revalidate the invoice first.')
+            if row['status']=='APPROVED' and po and amount:c.execute('UPDATE purchase_orders SET reserved_minor=reserved_minor-? WHERE number=?',(amount,po['number']))
+            if status=='APPROVED':c.execute('UPDATE purchase_orders SET reserved_minor=reserved_minor+? WHERE number=?',(amount,po['number']))
+            decision={**original,'status':status,'manual_override':True,'automated_status':original.get('automated_status',row['status']),'next_action':'Administrator override: '+note}
+            c.execute('UPDATE runs SET status=?,decision=?,updated_at=? WHERE id=?',(status,json.dumps(decision),now(),run_id))
+            self.store.event(run_id,'override','Explicit administrator override; this is not an automated approval.',c,{'actor':actor,'note':note,'before':{'status':row['status'],'decision':original},'after':{'status':status,'decision':decision}})
+        return self.store.get(run_id)
+
+    def reject(self, run_id, note,actor='AP reviewer'):
         with self.store.connect() as c:
             c.execute('BEGIN IMMEDIATE')
             row = c.execute('SELECT status FROM runs WHERE id=?',(run_id,)).fetchone()
             if not row or row['status'] != 'REVIEW':
                 raise ValueError('Only runs awaiting review can be rejected.')
             c.execute("UPDATE runs SET status='REJECTED',updated_at=? WHERE id=?",(now(),run_id))
-            self.store.event(run_id,'rejected','AP reviewer: '+note,c)
+            self.store.event(run_id,'rejected',actor+': '+note,c,{'actor':actor,'note':note,'before':{'status':row['status']},'after':{'status':'REJECTED'}})

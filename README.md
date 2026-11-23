@@ -1,5 +1,17 @@
 # Vellum Invoice Desk
 
+## Public demo accounts
+
+| Role | Email | Password |
+|---|---|---|
+| Admin | admin@vellum.example | Vellum-Demo-Admin-2026! |
+| Reviewer | reviewer@vellum.example | Vellum-Demo-Review-2026! |
+| Uploader | uploader@vellum.example | Vellum-Demo-Upload-2026! |
+
+Enable `DEMO_MODE=true` to seed the fictional, shared demo. Outside demo mode these accounts must change their passwords before accessing protected workspace APIs. Newly provisioned users must also change their temporary passwords. Do not upload private invoices to this public demo.
+
+See [350-document evidence, coverage, limitations, screenshots and demo recording guide](docs/HARDENING.md). The measured decision accuracy is 98.57% with zero false auto-approvals; external receipt field extraction is only 7.34%, so this remains a conservative review-oriented prototype.
+
 An invoice is a request to spend against an agreed purchase order. Vellum extracts the document, checks the evidence and remaining commitment, and returns **Approve**, **Review**, or **Reject** with reasons. It never executes a payment.
 
 This assignment implementation includes a marketing website, verified accounts, roles, original document preview, live processing events, review corrections, procurement balances, audit history and downloadable decisions.

@@ -51,7 +51,7 @@ def read_document(path):
         if not 1<=len(reader.pages)<=15:raise ValueError('PDF must contain 1 to 15 pages.')
         parts=[];confidences=[]
         for index,page in enumerate(reader.pages):
-            text=page.extract_text() or ''
+            text=page.extract_text(extraction_mode='layout') or ''
             if not text.strip() or bool(page.images):
                 if not shutil.which('pdftoppm'):raise ValueError('OCR requires Poppler (pdftoppm).')
                 with tempfile.TemporaryDirectory() as temp:

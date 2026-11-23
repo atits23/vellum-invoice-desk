@@ -56,7 +56,7 @@ def make_server(host='127.0.0.1', port=8000, data_dir=None):
                     return self.send(store.list())
                 if path == '/api/procurement':
                     with store.connect() as c:
-                        return self.send({'vendors':[dict(r) for r in c.execute('SELECT * FROM vendors')], 'pos':[dict(r) for r in c.execute('SELECT p.*,v.name AS vendor FROM purchase_orders p JOIN vendors v ON v.id=p.vendor_id')]})
+                        return self.send({'policy':dict(c.execute('SELECT * FROM policy WHERE id=1').fetchone()),'vendors':[dict(r) for r in c.execute('SELECT * FROM vendors')], 'pos':[dict(r) for r in c.execute('SELECT p.*,v.name AS vendor FROM purchase_orders p JOIN vendors v ON v.id=p.vendor_id')]})
                 if path == '/api/policy':
                     with store.connect() as c:return self.send(dict(c.execute('SELECT * FROM policy WHERE id=1').fetchone()))
                 if path == '/api/samples':
@@ -120,14 +120,16 @@ def make_server(host='127.0.0.1', port=8000, data_dir=None):
                         else:c.execute('UPDATE vendors SET approved=? WHERE id=?',(int(data['approved'] is True),data['id']))
                         c.execute('INSERT INTO admin_audit(actor,action,payload,at) VALUES(?,?,?,?)',(self.headers.get('X-Actor','admin'),path,json.dumps(data),__import__('app.store',fromlist=['now']).now()))
                     return self.send({'message':'Settings saved. Future decisions use the updated policy.'})
-                match = re.fullmatch(r'/api/runs/([a-f0-9]{32})/(review|reject)',path)
+                match = re.fullmatch(r'/api/runs/([a-f0-9]{32})/(review|reject|override)',path)
                 if match:
                     data = json.loads(body)
                     note = data.get('note','')
                     if not isinstance(note,str) or not 5 <= len(note.strip()) <= 2000:
                         raise ValueError('Enter a review note between 5 and 2000 characters.')
+                    if match[2] == 'override':
+                        return self.send(service.override(match[1],data.get('status'),note,self.headers.get('X-Actor','Administrator')))
                     if match[2] == 'reject':
-                        service.reject(match[1],note)
+                        service.reject(match[1],note,self.headers.get('X-Actor','AP reviewer'))
                         return self.send(store.get(match[1]))
                     fields = data.get('fields')
                     allowed = {'vendor','tax_id','invoice_number','invoice_date','due_date','po_number','currency','subtotal','tax','total','items','cgst','sgst','igst','discount','shipping','round_off','document_type'}

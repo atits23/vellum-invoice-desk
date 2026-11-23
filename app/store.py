@@ -89,4 +89,4 @@ class Store:
 
     def list(self):
         with self.connect() as c:
-            return [dict(r) for r in c.execute('SELECT id,filename,status,created_at,updated_at,fields,decision FROM runs ORDER BY created_at DESC LIMIT 500')]
+            return [dict(r) for r in c.execute('SELECT id,filename,status,created_at,updated_at,fields,decision,metadata FROM runs ORDER BY created_at DESC')]
