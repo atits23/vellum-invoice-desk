@@ -29,6 +29,8 @@ Render Free blocks outbound SMTP ports 25/465/587, so use Brevo over HTTPS. SMTP
 5. Restart the service and confirm that accounts, runs, original documents and PO balances remain. PostgreSQL holds these; container scratch files are disposable.
 6. Log out and navigate directly to `/app`; it must redirect to login. Test reset email separately.
 
+Live service: https://vellum-invoice-desk-atits23.onrender.com. Render service ID `srv-dc1qkprl550s73f8tdtg` uses plan `free`. This service was linked using a public repository URL: although the API reports autoDeploy enabled, pushes did not initiate deployments. Use Render's **Manual Deploy → Deploy latest commit**, or connect your GitHub provider to enable automatic deployments. Never assume a push is live; inspect the deployed commit.
+
 Neon project: `vellum-invoice-desk` (`shy-morning-90418108`), created in an organization reporting plan `free`. The test schemas are separate from production schemas. The app caps stored upload bytes at 200 MB, but database indexes, accounts and audit records also consume storage. Monitor free quotas; reaching a limit should interrupt service, never trigger an intentional paid upgrade.
 
 Use one service instance/worker. Free Render may sleep after inactivity and take time to start. Do not benchmark a cold start as warm processing latency. No live URL is claimed verified until the end-to-end production check passes.

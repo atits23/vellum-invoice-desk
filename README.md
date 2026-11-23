@@ -6,7 +6,7 @@ This assignment implementation includes a marketing website, verified accounts, 
 
 Repository: https://github.com/atits23/vellum-invoice-desk
 
-Public deployment: https://vellum-invoice-desk-atits23.onrender.com — live; final account/workflow verification in progress. See [deployment instructions](docs/DEPLOYMENT.md).
+Public deployment: **https://vellum-invoice-desk-atits23.onrender.com**. Verified with real email signup, login, document uploads, OCR, review, dashboard and logout. See [deployment instructions](docs/DEPLOYMENT.md).
 
 ## Run locally
 

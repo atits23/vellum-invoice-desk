@@ -8,6 +8,8 @@ Run `scripts/start-local.cmd` (works without changing PowerShell execution polic
 
 Have `samples/01-happy-path.pdf`, `02-split-over-budget.pdf`, `03-semantic-duplicate.pdf`, `04-ambiguous-po.pdf`, and `09-scanned-invoice.pdf` ready. The clean invoice must precede the split/duplicate examples. Repeat takes need a new local data directory, not manual deletion of audit rows.
 
+The deployed owner's demonstration account is already verified. Its generated login details are saved privately at `E:\Zamp\tmp\owner-login.json`, excluded from Git. Use Settings to change the password if desired. Do not show this file in the recording. The live workspace already contains verification runs; show those histories or use a fresh local workspace for the exact sequence below.
+
 | Time | Show | Suggested narration |
 |---|---|---|
 | 0:00–0:30 | Marketing page and How it works | “Vellum takes an invoice and explains whether it is safe to approve, needs review, or must be rejected. Nothing here sends a payment.” |
