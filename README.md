@@ -77,16 +77,16 @@ SQLite supports local development. Free container hosting uses PostgreSQL for ac
 
 ## Measured evaluation
 
-The committed [report](reports/evaluation.html) and [JSON](reports/evaluation.json) were produced by the actual processing service using the [manifest](tests/corpus/manifest.csv). Labels were authored independently of engine output. The 134 files include 131 controlled synthetic variants and three public fictional upstream fixtures under MIT. Variants are correlated; this is a regression corpus, not a representative real-world benchmark.
+The committed [report](reports/evaluation.html) and [JSON](reports/evaluation.json) were produced by the actual processing service using the [manifest](tests/corpus/manifest.csv). The 350 files include 247 synthetic fixtures, 100 public CORD receipt photos under CC BY 4.0, and three MIT invoice fixtures. CORD uses upstream human annotations; synthetic expectations were authored independently of engine output. Variants are correlated; this is a regression corpus, not a representative real-world benchmark.
 
 | Metric | Before | After |
 |---|---:|---:|
-| Decision routing accuracy | 97.76% | 100% (134/134) |
-| False approvals on unsafe inputs | 0 | 0/122 |
-| Straight-through approval | 8.21% | 8.96% (12/134) |
-| External field extraction | 10.53% | 10.53% |
+| Decision routing accuracy | 94.57% | 98.57% (345/350) |
+| False approvals on unsafe inputs | 0/333 | 0/333 |
+| Straight-through approval | 3.43% | 4.57% (16/350) |
+| External field extraction | 0.92% | 7.34% |
 
-The low external extraction score is a material limitation. Safe review routing is not successful automatic extraction. All scans deliberately require review. Per-field scores, confusion matrix, precision/recall, OCR confidence and latency p50/p95 are in the report. [Before report](reports/before.html).
+The low external extraction score is a material limitation. Safe review routing is not successful automatic extraction. All scans deliberately require review. Per-field scores, confusion matrix, precision/recall, OCR confidence and latency p50/p95 are in the report. [Before report](reports/hard-before.html). See the [coverage map and remaining gaps](docs/HARDENING.md).
 
 ## Verification
 
