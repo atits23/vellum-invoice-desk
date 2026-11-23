@@ -1,0 +1,10 @@
+import {spawn} from 'node:child_process';
+import fs from 'node:fs';import path from 'node:path';import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const candidates=[process.env.PYTHON_BIN,path.join(root,'.venv/Scripts/python.exe'),'C:/Program Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1112-737-0_26.1112.737.0_x64__3k8sg7r9htsxt/dependencies/python/python.exe'];
+const python=candidates.find(p=>p&&fs.existsSync(p))||'python';
+const dir=path.join(root,'tmp','video-'+Date.now());fs.mkdirSync(dir,{recursive:true});
+const env={...process.env,PYTHON_BIN:python,NODE_ENV:'test',DEMO_MODE:'true',DATABASE_URL:'',BREVO_API_KEY:'',SMTP_URL:'',MAIL_FROM:'',BOOTSTRAP_ADMIN:'owner@example.com',DATA_DIR:dir,PORT:'8020',ENGINE_PORT:'9020',PUBLIC_URL:'http://localhost:8020',HOST:'127.0.0.1'};
+console.log('Fresh fictional recording workspace: http://localhost:8020\nData folder: '+dir+'\nStop with Ctrl+C. Each restart creates a new workspace.');
+const child=spawn(process.execPath,['web/server.mjs'],{cwd:root,env,stdio:'inherit',windowsHide:true});
+child.on('exit',code=>process.exit(code||0));for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>child.kill());

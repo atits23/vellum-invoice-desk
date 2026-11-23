@@ -1,0 +1,55 @@
+[
+  {
+    "file": "01-approved-first-invoice.pdf",
+    "expected": "APPROVED",
+    "actual": "APPROVED",
+    "failed_checks": []
+  },
+  {
+    "file": "02-one-cent-over-remaining.pdf",
+    "expected": "REVIEW",
+    "actual": "REVIEW",
+    "failed_checks": [
+      {
+        "code": "budget",
+        "passed": false,
+        "message": "Gross requested 420.01; available 420.00 USD. Cumulative excess 20.01 / 1000.00 = 2.00%; tolerance 2.0% or 0.00, whichever is greater."
+      }
+    ]
+  },
+  {
+    "file": "03-reformatted-duplicate.pdf",
+    "expected": "REJECTED",
+    "actual": "REJECTED",
+    "failed_checks": [
+      {
+        "code": "duplicate",
+        "passed": false,
+        "message": "Duplicate of run 6e63eeb162354bd29fd1e8567348e3fb"
+      },
+      {
+        "code": "budget",
+        "passed": false,
+        "message": "Gross requested 600.00; available 420.00 USD. Cumulative excess 200.00 / 1000.00 = 20.00%; tolerance 2.0% or 0.00, whichever is greater."
+      }
+    ]
+  },
+  {
+    "file": "04-blocked-vendor.pdf",
+    "expected": "REVIEW",
+    "actual": "REVIEW",
+    "failed_checks": [
+      {
+        "code": "vendor_approved",
+        "passed": false,
+        "message": "Vendor is blocked in procurement."
+      }
+    ]
+  },
+  {
+    "file": "05-exact-boundary-approved.pdf",
+    "expected": "APPROVED",
+    "actual": "APPROVED",
+    "failed_checks": []
+  }
+]
