@@ -1,0 +1,30 @@
+# Free compute with external PostgreSQL persistence. No paid disk is provisioned.
+services:
+  - type: web
+    name: vellum-preview
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PUBLIC_URL
+        sync: false
+      - key: BREVO_API_KEY
+        sync: false
+      - key: MAIL_FROM
+        sync: false
+      - key: BOOTSTRAP_ADMIN
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: DB_SCHEMA
+        value: vellum_accounts
+      - key: ENGINE_DB_SCHEMA
+        value: vellum_engine
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 8000
+      - key: DATA_DIR
+        value: /tmp/vellum-data

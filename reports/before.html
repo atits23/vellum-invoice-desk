@@ -1,0 +1,156 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Vellum evaluation</title><style>body{font:16px system-ui;margin:40px;color:#222}table{border-collapse:collapse}td,th{border:1px solid #ddd;padding:10px}pre{white-space:pre-wrap}</style><h1>Vellum evaluation</h1><p>Controlled regression corpus plus three public fictional upstream test documents. Variants share templates and are not independent real-world samples. No claim of universal invoice accuracy. Ground truth is authored before execution.</p><pre>{
+  &quot;available&quot;: true,
+  &quot;generated_at&quot;: &quot;2026-11-22T19:22:13.153471+00:00&quot;,
+  &quot;scope&quot;: &quot;Controlled regression corpus plus three public fictional upstream test documents. Variants share templates and are not independent real-world samples. No claim of universal invoice accuracy. Ground truth is authored before execution.&quot;,
+  &quot;total&quot;: 134,
+  &quot;external_count&quot;: 3,
+  &quot;synthetic_count&quot;: 131,
+  &quot;decision_accuracy&quot;: 0.9776119402985075,
+  &quot;false_approve_rate&quot;: 0.0,
+  &quot;false_approve_count&quot;: 0,
+  &quot;unsafe_input_count&quot;: 122,
+  &quot;straight_through_rate&quot;: 0.08208955223880597,
+  &quot;confusion_matrix&quot;: {
+    &quot;APPROVED&quot;: {
+      &quot;APPROVED&quot;: 11,
+      &quot;REVIEW&quot;: 1,
+      &quot;REJECTED&quot;: 0
+    },
+    &quot;REVIEW&quot;: {
+      &quot;APPROVED&quot;: 0,
+      &quot;REVIEW&quot;: 114,
+      &quot;REJECTED&quot;: 1
+    },
+    &quot;REJECTED&quot;: {
+      &quot;APPROVED&quot;: 0,
+      &quot;REVIEW&quot;: 1,
+      &quot;REJECTED&quot;: 6
+    }
+  },
+  &quot;routing&quot;: {
+    &quot;APPROVED&quot;: {
+      &quot;precision&quot;: 1.0,
+      &quot;recall&quot;: 0.9166666666666666
+    },
+    &quot;REVIEW&quot;: {
+      &quot;precision&quot;: 0.9827586206896551,
+      &quot;recall&quot;: 0.991304347826087
+    },
+    &quot;REJECTED&quot;: {
+      &quot;precision&quot;: 0.8571428571428571,
+      &quot;recall&quot;: 0.8571428571428571
+    }
+  },
+  &quot;fields&quot;: {
+    &quot;vendor&quot;: {
+      &quot;correct&quot;: 123,
+      &quot;total&quot;: 127,
+      &quot;accuracy&quot;: 0.968503937007874
+    },
+    &quot;tax_id&quot;: {
+      &quot;correct&quot;: 127,
+      &quot;total&quot;: 127,
+      &quot;accuracy&quot;: 1.0
+    },
+    &quot;invoice_number&quot;: {
+      &quot;correct&quot;: 124,
+      &quot;total&quot;: 127,
+      &quot;accuracy&quot;: 0.9763779527559056
+    },
+    &quot;invoice_date&quot;: {
+      &quot;correct&quot;: 125,
+      &quot;total&quot;: 127,
+      &quot;accuracy&quot;: 0.984251968503937
+    },
+    &quot;po_number&quot;: {
+      &quot;correct&quot;: 120,
+      &quot;total&quot;: 122,
+      &quot;accuracy&quot;: 0.9836065573770492
+    },
+    &quot;currency&quot;: {
+      &quot;correct&quot;: 126,
+      &quot;total&quot;: 130,
+      &quot;accuracy&quot;: 0.9692307692307692
+    },
+    &quot;subtotal&quot;: {
+      &quot;correct&quot;: 126,
+      &quot;total&quot;: 129,
+      &quot;accuracy&quot;: 0.9767441860465116
+    },
+    &quot;tax&quot;: {
+      &quot;correct&quot;: 126,
+      &quot;total&quot;: 128,
+      &quot;accuracy&quot;: 0.984375
+    },
+    &quot;total&quot;: {
+      &quot;correct&quot;: 123,
+      &quot;total&quot;: 127,
+      &quot;accuracy&quot;: 0.968503937007874
+    },
+    &quot;cgst&quot;: {
+      &quot;correct&quot;: 9,
+      &quot;total&quot;: 9,
+      &quot;accuracy&quot;: 1.0
+    },
+    &quot;sgst&quot;: {
+      &quot;correct&quot;: 9,
+      &quot;total&quot;: 9,
+      &quot;accuracy&quot;: 1.0
+    },
+    &quot;igst&quot;: {
+      &quot;correct&quot;: 3,
+      &quot;total&quot;: 3,
+      &quot;accuracy&quot;: 1.0
+    },
+    &quot;discount&quot;: {
+      &quot;correct&quot;: 3,
+      &quot;total&quot;: 3,
+      &quot;accuracy&quot;: 1.0
+    },
+    &quot;shipping&quot;: {
+      &quot;correct&quot;: 3,
+      &quot;total&quot;: 3,
+      &quot;accuracy&quot;: 1.0
+    },
+    &quot;round_off&quot;: {
+      &quot;correct&quot;: 6,
+      &quot;total&quot;: 6,
+      &quot;accuracy&quot;: 1.0
+    },
+    &quot;document_type&quot;: {
+      &quot;correct&quot;: 6,
+      &quot;total&quot;: 6,
+      &quot;accuracy&quot;: 1.0
+    }
+  },
+  &quot;latency_ms&quot;: {
+    &quot;p50&quot;: 743.985,
+    &quot;p95&quot;: 1480.71
+  },
+  &quot;slices&quot;: {
+    &quot;synthetic&quot;: {
+      &quot;total&quot;: 131,
+      &quot;decision_accuracy&quot;: 0.9847328244274809,
+      &quot;field_accuracy&quot;: 0.9939862542955327
+    },
+    &quot;external&quot;: {
+      &quot;total&quot;: 3,
+      &quot;decision_accuracy&quot;: 0.6666666666666666,
+      &quot;field_accuracy&quot;: 0.10526315789473684
+    }
+  },
+  &quot;modes&quot;: {
+    &quot;ocr&quot;: {
+      &quot;count&quot;: 48,
+      &quot;decision_accuracy&quot;: 0.9791666666666666,
+      &quot;mean_ocr_confidence&quot;: 0.9501041666666666,
+      &quot;field_accuracy&quot;: 0.9770114942528736
+    },
+    &quot;text&quot;: {
+      &quot;count&quot;: 86,
+      &quot;decision_accuracy&quot;: 0.9767441860465116,
+      &quot;mean_ocr_confidence&quot;: 0.9595555555555555,
+      &quot;field_accuracy&quot;: 0.9812834224598931
+    }
+  }
+}</pre><table><tr><th>File</th><th>Expected</th><th>Actual</th><th>ms</th><th>Reason</th></tr><tr><td>001-clean-0.pdf</td><td>APPROVED</td><td>APPROVED</td><td>762.69</td><td></td></tr><tr><td>001-clean-1.pdf</td><td>APPROVED</td><td>REVIEW</td><td>1442.01</td><td>OCR requires source verification.</td></tr><tr><td>001-clean-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1489.14</td><td>OCR requires source verification.</td></tr><tr><td>002-missing_number-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>738.61</td><td>Missing: invoice_number; Invoice reference must contain letters or digits.</td></tr><tr><td>002-missing_number-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>758.58</td><td>Missing: invoice_number; Invoice reference must contain letters or digits.</td></tr><tr><td>002-missing_number-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1467.43</td><td>Missing: invoice_number; Invoice reference must contain letters or digits.; OCR requires source verification.</td></tr><tr><td>003-missing_date-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>850.35</td><td>Missing: invoice_date; Use valid ISO dates (YYYY-MM-DD).</td></tr><tr><td>003-missing_date-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>703.39</td><td>Missing: invoice_date; Use valid ISO dates (YYYY-MM-DD).</td></tr><tr><td>003-missing_date-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1405.05</td><td>Missing: invoice_date; OCR requires source verification.; Use valid ISO dates (YYYY-MM-DD).</td></tr><tr><td>004-missing_total-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>711.22</td><td>Missing: total; Invalid or ambiguous monetary values.</td></tr><tr><td>004-missing_total-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>727.52</td><td>Missing: total; Invalid or ambiguous monetary values.</td></tr><tr><td>004-missing_total-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1420.29</td><td>Missing: total; OCR requires source verification.; Invalid or ambiguous monetary values.</td></tr><tr><td>005-missing_vendor-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>736.65</td><td>Missing: vendor; Vendor name variant matched by tax ID; verify legal name.</td></tr><tr><td>005-missing_vendor-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>1386.95</td><td>Missing: vendor; OCR requires source verification.; Vendor name variant matched by tax ID; verify legal name.</td></tr><tr><td>005-missing_vendor-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1468.32</td><td>Missing: vendor; OCR requires source verification.; Vendor name variant matched by tax ID; verify legal name.</td></tr><tr><td>006-missing_po_unique-0.pdf</td><td>APPROVED</td><td>APPROVED</td><td>726.52</td><td></td></tr><tr><td>006-missing_po_unique-1.pdf</td><td>APPROVED</td><td>APPROVED</td><td>733.66</td><td></td></tr><tr><td>006-missing_po_unique-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1401.04</td><td>OCR requires source verification.</td></tr><tr><td>007-po_typo-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>717.21</td><td>Explicit PO is unknown; no automatic substitution.</td></tr><tr><td>007-po_typo-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>709.85</td><td>Explicit PO is unknown; no automatic substitution.</td></tr><tr><td>007-po_typo-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1400.86</td><td>OCR requires source verification.</td></tr><tr><td>008-ambiguous_po-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>709.06</td><td>2 eligible POs; an explicit reference is required.</td></tr><tr><td>008-ambiguous_po-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>700.91</td><td>2 eligible POs; an explicit reference is required.</td></tr><tr><td>008-ambiguous_po-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1392.59</td><td>OCR requires source verification.; 2 eligible POs; an explicit reference is required.</td></tr><tr><td>009-arithmetic-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>705.78</td><td>Subtotal − discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).</td></tr><tr><td>009-arithmetic-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>1309.23</td><td>OCR requires source verification.; Subtotal − discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).</td></tr><tr><td>009-arithmetic-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1424.08</td><td>OCR requires source verification.; Subtotal − discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).</td></tr><tr><td>010-tax_mixed-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>705.23</td><td>Use either IGST or CGST/SGST; components must sum to total tax.</td></tr><tr><td>010-tax_mixed-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>718.61</td><td>Use either IGST or CGST/SGST; components must sum to total tax.</td></tr><tr><td>010-tax_mixed-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1425.16</td><td>OCR requires source verification.; Use either IGST or CGST/SGST; components must sum to total tax.</td></tr><tr><td>011-gst_split-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>733.56</td><td>CGST and SGST must be equal within one cent.</td></tr><tr><td>011-gst_split-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>710.8</td><td>CGST and SGST must be equal within one cent.</td></tr><tr><td>011-gst_split-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1421.22</td><td>OCR requires source verification.; CGST and SGST must be equal within one cent.</td></tr><tr><td>012-gst_valid-0.pdf</td><td>APPROVED</td><td>APPROVED</td><td>705.44</td><td></td></tr><tr><td>012-gst_valid-1.pdf</td><td>APPROVED</td><td>APPROVED</td><td>709.76</td><td></td></tr><tr><td>012-gst_valid-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1455.17</td><td>OCR requires source verification.</td></tr><tr><td>013-adjustments-0.pdf</td><td>APPROVED</td><td>APPROVED</td><td>708.95</td><td></td></tr><tr><td>013-adjustments-1.pdf</td><td>APPROVED</td><td>APPROVED</td><td>705.11</td><td></td></tr><tr><td>013-adjustments-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1439.56</td><td>OCR requires source verification.</td></tr><tr><td>014-rounding_invalid-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>704.32</td><td>Subtotal − discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).</td></tr><tr><td>014-rounding_invalid-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>707.8</td><td>Subtotal − discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).</td></tr><tr><td>014-rounding_invalid-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1400.56</td><td>OCR requires source verification.; Subtotal − discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).</td></tr><tr><td>015-credit_note-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>705.29</td><td>Document type: CREDIT NOTE. Credit notes and proforma invoices need a separate verified workflow.</td></tr><tr><td>015-credit_note-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>713.76</td><td>Document type: CREDIT NOTE. Credit notes and proforma invoices need a separate verified workflow.</td></tr><tr><td>015-credit_note-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1438.86</td><td>Document type: CREDIT NOTE. Credit notes and proforma invoices need a separate verified workflow.; OCR requires source verification.</td></tr><tr><td>016-proforma-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>710.13</td><td>Document type: PROFORMA. Credit notes and proforma invoices need a separate verified workflow.</td></tr><tr><td>016-proforma-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>706.63</td><td>Document type: PROFORMA. Credit notes and proforma invoices need a separate verified workflow.</td></tr><tr><td>016-proforma-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1426.73</td><td>Document type: PROFORMA. Credit notes and proforma invoices need a separate verified workflow.; OCR requires source verification.</td></tr><tr><td>017-blocked_vendor-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>719.48</td><td>Vendor is blocked in procurement.</td></tr><tr><td>017-blocked_vendor-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>1340.05</td><td>OCR requires source verification.; Vendor is blocked in procurement.</td></tr><tr><td>017-blocked_vendor-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1412.76</td><td>OCR requires source verification.; Vendor is blocked in procurement.</td></tr><tr><td>018-vendor_variant-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>730.06</td><td>Vendor name variant matched by tax ID; verify legal name.</td></tr><tr><td>018-vendor_variant-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>698.19</td><td>Vendor name variant matched by tax ID; verify legal name.</td></tr><tr><td>018-vendor_variant-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1390.76</td><td>OCR requires source verification.; Vendor name variant matched by tax ID; verify legal name.</td></tr><tr><td>019-unknown_vendor-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>701.91</td><td>Vendor name is unknown or ambiguous; verify against master data.</td></tr><tr><td>019-unknown_vendor-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>697.18</td><td>Vendor name is unknown or ambiguous; verify against master data.</td></tr><tr><td>019-unknown_vendor-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1389.23</td><td>OCR requires source verification.; Vendor name is unknown or ambiguous; verify against master data.</td></tr><tr><td>020-currency_mismatch-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>712.14</td><td>Invoice and PO currencies must match; no implicit FX conversion.</td></tr><tr><td>020-currency_mismatch-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>698.97</td><td>Invoice and PO currencies must match; no implicit FX conversion.</td></tr><tr><td>020-currency_mismatch-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1414.89</td><td>OCR requires source verification.; Invoice and PO currencies must match; no implicit FX conversion.</td></tr><tr><td>021-unsupported_currency-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>702.28</td><td>Currency: JPY</td></tr><tr><td>021-unsupported_currency-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>1341.26</td><td>OCR requires source verification.; Currency: JPY</td></tr><tr><td>021-unsupported_currency-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1423.69</td><td>OCR requires source verification.; Currency: JPY</td></tr><tr><td>022-future_date-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>694.71</td><td>Invoice must not be future-dated; due date must follow invoice date.</td></tr><tr><td>022-future_date-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>699.54</td><td>Invoice must not be future-dated; due date must follow invoice date.</td></tr><tr><td>022-future_date-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1383.54</td><td>OCR requires source verification.; Invoice must not be future-dated; due date must follow invoice date.</td></tr><tr><td>023-old_date-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>721.57</td><td>Invoices older than 365 days require review.</td></tr><tr><td>023-old_date-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>696.25</td><td>Invoices older than 365 days require review.</td></tr><tr><td>023-old_date-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1400.01</td><td>OCR requires source verification.; Invoices older than 365 days require review.</td></tr><tr><td>024-invalid_date-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>706.47</td><td>Use valid ISO dates (YYYY-MM-DD).</td></tr><tr><td>024-invalid_date-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>688.95</td><td>Use valid ISO dates (YYYY-MM-DD).</td></tr><tr><td>024-invalid_date-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1394.64</td><td>OCR requires source verification.; Use valid ISO dates (YYYY-MM-DD).</td></tr><tr><td>025-closed_po-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>692.94</td><td>PO must be open.</td></tr><tr><td>025-closed_po-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>1296.36</td><td>OCR requires source verification.; PO must be open.</td></tr><tr><td>025-closed_po-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1455.24</td><td>OCR requires source verification.; PO must be open.</td></tr><tr><td>026-wrong_vendor_po-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>833.94</td><td>PO must belong to the invoicing vendor.</td></tr><tr><td>026-wrong_vendor_po-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>778.92</td><td>PO must belong to the invoicing vendor.</td></tr><tr><td>026-wrong_vendor_po-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1463.6</td><td>OCR requires source verification.; PO must belong to the invoicing vendor.</td></tr><tr><td>027-amount_over-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>751.27</td><td>Gross requested 1030.00; available 1020.00 USD. Cumulative excess 30.00 / 1000.00 = 3.00%; tolerance 2.0% or 0.00, whichever is greater.</td></tr><tr><td>027-amount_over-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>734.05</td><td>Gross requested 1030.00; available 1020.00 USD. Cumulative excess 30.00 / 1000.00 = 3.00%; tolerance 2.0% or 0.00, whichever is greater.</td></tr><tr><td>027-amount_over-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1415.88</td><td>OCR requires source verification.; Gross requested 1030.00; available 1020.00 USD. Cumulative excess 30.00 / 1000.00 = 3.00%; tolerance 2.0% or 0.00, whichever is greater.</td></tr><tr><td>028-tolerance_boundary-0.pdf</td><td>APPROVED</td><td>APPROVED</td><td>718.45</td><td></td></tr><tr><td>028-tolerance_boundary-1.pdf</td><td>APPROVED</td><td>APPROVED</td><td>715.92</td><td></td></tr><tr><td>028-tolerance_boundary-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1397.34</td><td>OCR requires source verification.</td></tr><tr><td>029-zero_total-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>714.96</td><td>Total must be positive; credit notes require a separate workflow.; Gross requested 0.00; available 1020.00 USD. Cumulative excess 0.00 / 1000.00 = 0.00%; tolerance 2.0% or 0.00, whichever is greater.</td></tr><tr><td>029-zero_total-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>1323.95</td><td>OCR requires source verification.; Total must be positive; credit notes require a separate workflow.; Gross requested 0.00; available 1020.00 USD. Cumulative excess 0.00 / 1000.00 = 0.00%; tolerance 2.0% or 0.00, whichever is greater.</td></tr><tr><td>029-zero_total-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1408.3</td><td>OCR requires source verification.; Total must be positive; credit notes require a separate workflow.; Gross requested 0.00; available 1020.00 USD. Cumulative excess 0.00 / 1000.00 = 0.00%; tolerance 2.0% or 0.00, whichever is greater.</td></tr><tr><td>030-negative_total-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>715.64</td><td>Total must be positive; credit notes require a separate workflow.; Subtotal − discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).; Gross requested -600.00; available 1020.00 USD. Cumulative excess 0.00 / 1000.00 = 0.00%; tolerance 2.0% or 0.00, whichever is greater.</td></tr><tr><td>030-negative_total-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>706.51</td><td>Total must be positive; credit notes require a separate workflow.; Subtotal − discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).; Gross requested -600.00; available 1020.00 USD. Cumulative excess 0.00 / 1000.00 = 0.00%; tolerance 2.0% or 0.00, whichever is greater.</td></tr><tr><td>030-negative_total-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1389.3</td><td>OCR requires source verification.; Total must be positive; credit notes require a separate workflow.; Subtotal − discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).; Gross requested -600.00; available 1020.00 USD. Cumulative excess 0.00 / 1000.00 = 0.00%; tolerance 2.0% or 0.00, whichever is greater.</td></tr><tr><td>031-invalid_money-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>709.98</td><td>Invalid or ambiguous monetary values.</td></tr><tr><td>031-invalid_money-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>766.52</td><td>Invalid or ambiguous monetary values.</td></tr><tr><td>031-invalid_money-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1423.25</td><td>OCR requires source verification.; Invalid or ambiguous monetary values.</td></tr><tr><td>032-duplicate-0.pdf</td><td>REJECTED</td><td>REJECTED</td><td>714.95</td><td>Duplicate of run a6dd6c2ab2a04ff6b5877bb11364507b; Gross requested 600.00; available 420.00 USD. Cumulative excess 200.00 / 1000.00 = 20.00%; tolerance 2.0% or 0.00, whichever is greater.</td></tr><tr><td>032-duplicate-1.pdf</td><td>REJECTED</td><td>REJECTED</td><td>718.26</td><td>Duplicate of run 05d74792296d4f3a8dcaebcb53c7cdb7; Gross requested 600.00; available 420.00 USD. Cumulative excess 200.00 / 1000.00 = 20.00%; tolerance 2.0% or 0.00, whichever is greater.</td></tr><tr><td>032-duplicate-2.jpg</td><td>REJECTED</td><td>REJECTED</td><td>1405.79</td><td>OCR requires source verification.; Duplicate of run c07b86f6bf8d40be82315c259b513c83; Gross requested 600.00; available 420.00 USD. Cumulative excess 200.00 / 1000.00 = 20.00%; tolerance 2.0% or 0.00, whichever is greater.</td></tr><tr><td>033-split_balance-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>711.08</td><td>Gross requested 480.00; available 420.00 USD. Cumulative excess 80.00 / 1000.00 = 8.00%; tolerance 2.0% or 0.00, whichever is greater.</td></tr><tr><td>033-split_balance-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>1347.52</td><td>OCR requires source verification.; Gross requested 480.00; available 420.00 USD. Cumulative excess 80.00 / 1000.00 = 8.00%; tolerance 2.0% or 0.00, whichever is greater.</td></tr><tr><td>033-split_balance-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1392.25</td><td>OCR requires source verification.; Gross requested 480.00; available 420.00 USD. Cumulative excess 80.00 / 1000.00 = 8.00%; tolerance 2.0% or 0.00, whichever is greater.</td></tr><tr><td>034-same_amount_other_number-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>712.04</td><td>Same vendor, date and amount with another reference; verify separate delivery.; Gross requested 600.00; available 420.00 USD. Cumulative excess 200.00 / 1000.00 = 20.00%; tolerance 2.0% or 0.00, whichever is greater.</td></tr><tr><td>034-same_amount_other_number-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>724.1</td><td>Same vendor, date and amount with another reference; verify separate delivery.; Gross requested 600.00; available 420.00 USD. Cumulative excess 200.00 / 1000.00 = 20.00%; tolerance 2.0% or 0.00, whichever is greater.</td></tr><tr><td>034-same_amount_other_number-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1394.0</td><td>OCR requires source verification.; Same vendor, date and amount with another reference; verify separate delivery.; Gross requested 600.00; available 420.00 USD. Cumulative excess 200.00 / 1000.00 = 20.00%; tolerance 2.0% or 0.00, whichever is greater.</td></tr><tr><td>035-item_mismatch-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>722.6</td><td>Item 1: description match confidence 17%; threshold 85%. Curated synonyms plus lexical similarity, not an embedding model.</td></tr><tr><td>035-item_mismatch-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>715.45</td><td>Item 1: description match confidence 17%; threshold 85%. Curated synonyms plus lexical similarity, not an embedding model.</td></tr><tr><td>035-item_mismatch-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1446.84</td><td>OCR requires source verification.; Item 1: description match confidence 17%; threshold 85%. Curated synonyms plus lexical similarity, not an embedding model.</td></tr><tr><td>036-item_unit-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>719.88</td><td>Unit box; PO unit each. No implicit unit conversion.</td></tr><tr><td>036-item_unit-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>702.43</td><td>Unit box; PO unit each. No implicit unit conversion.</td></tr><tr><td>036-item_unit-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1480.71</td><td>OCR requires source verification.; Unit box; PO unit each. No implicit unit conversion.</td></tr><tr><td>037-item_valid-0.pdf</td><td>APPROVED</td><td>APPROVED</td><td>731.08</td><td></td></tr><tr><td>037-item_valid-1.pdf</td><td>APPROVED</td><td>APPROVED</td><td>717.58</td><td></td></tr><tr><td>037-item_valid-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1829.34</td><td>OCR requires source verification.</td></tr><tr><td>038-item_price-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>756.14</td><td>Unit price 250; PO price 100.00.</td></tr><tr><td>038-item_price-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>705.25</td><td>Unit price 250; PO price 100.00.</td></tr><tr><td>038-item_price-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1482.7</td><td>OCR requires source verification.; Unit price 250; PO price 100.00.</td></tr><tr><td>039-prompt_injection-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>710.59</td><td>Subtotal − discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).; Gross requested 9999.00; available 1020.00 USD. Cumulative excess 8999.00 / 1000.00 = 899.90%; tolerance 2.0% or 0.00, whichever is greater.</td></tr><tr><td>039-prompt_injection-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>711.33</td><td>Subtotal − discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).; Gross requested 9999.00; available 1020.00 USD. Cumulative excess 8999.00 / 1000.00 = 899.90%; tolerance 2.0% or 0.00, whichever is greater.</td></tr><tr><td>039-prompt_injection-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1516.2</td><td>OCR requires source verification.; Subtotal − discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).; Gross requested 9999.00; available 1020.00 USD. Cumulative excess 8999.00 / 1000.00 = 899.90%; tolerance 2.0% or 0.00, whichever is greater.</td></tr><tr><td>040-conflicting_total-0.pdf</td><td>REVIEW</td><td>REVIEW</td><td>708.38</td><td>Conflicting values: total</td></tr><tr><td>040-conflicting_total-1.pdf</td><td>REVIEW</td><td>REVIEW</td><td>714.38</td><td>Conflicting values: total</td></tr><tr><td>040-conflicting_total-2.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1453.92</td><td>Conflicting values: total; OCR requires source verification.</td></tr><tr><td>photo-blur.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1345.52</td><td>Missing: vendor, total; OCR requires source verification.; Currency: USO; Invalid or ambiguous monetary values.; Vendor name variant matched by tax ID; verify legal name.</td></tr><tr><td>photo-dark.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1408.57</td><td>OCR requires source verification.</td></tr><tr><td>photo-skew.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1437.19</td><td>OCR requires source verification.</td></tr><tr><td>photo-rotated.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1453.16</td><td>OCR requires source verification.</td></tr><tr><td>photo-crop.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1240.03</td><td>Missing: total; OCR requires source verification.; Invalid or ambiguous monetary values.</td></tr><tr><td>photo-stamp.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1431.28</td><td>OCR requires source verification.</td></tr><tr><td>photo-shadow.jpg</td><td>REVIEW</td><td>REVIEW</td><td>1421.35</td><td>OCR requires source verification.</td></tr><tr><td>corrupt.pdf</td><td>REJECTED</td><td>REJECTED</td><td>691.37</td><td>Invalid or malformed document.</td></tr><tr><td>encrypted.pdf</td><td>REJECTED</td><td>REJECTED</td><td>717.02</td><td>Password-protected PDF. Upload an unlocked copy.</td></tr><tr><td>blank.pdf</td><td>REJECTED</td><td>REJECTED</td><td>1281.19</td><td>Blank or unreadable document; upload a clearer complete invoice.</td></tr><tr><td>non_invoice.pdf</td><td>REJECTED</td><td>REVIEW</td><td>713.64</td><td>Missing: vendor, invoice_number, invoice_date, currency, total; Invoice reference must contain letters or digits.; Currency: missing; Use valid ISO dates (YYYY-MM-DD).; Invalid or ambiguous monetary values.; Vendor name is unknown or ambiguous; verify against master data.</td></tr><tr><td>external-AzureInterior.pdf</td><td>REVIEW</td><td>REVIEW</td><td>2306.32</td><td>Missing: vendor, invoice_number, currency, total; Invoice reference must contain letters or digits.; OCR requires source verification.; Currency: missing; Use valid ISO dates (YYYY-MM-DD).; Invalid or ambiguous monetary values.; Vendor name is unknown or ambiguous; verify against master data.</td></tr><tr><td>external-SammyMaystoneLinesTest.pdf</td><td>REVIEW</td><td>REVIEW</td><td>749.36</td><td>Missing: vendor, invoice_number, invoice_date, currency, total; Invoice reference must contain letters or digits.; Conflicting values: tax; Currency: missing; Use valid ISO dates (YYYY-MM-DD).; Invalid or ambiguous monetary values.; Vendor name is unknown or ambiguous; verify against master data.</td></tr><tr><td>external-SammyMaystoneLinesTest.png</td><td>REVIEW</td><td>REJECTED</td><td>1862.22</td><td>Document type: NON-INVOICE. Credit notes and proforma invoices need a separate verified workflow.; Missing: vendor, invoice_number, currency; Invoice reference must contain letters or digits.; Conflicting values: tax; OCR requires source verification.; Currency: missing; Invoices older than 365 days require review.; Invalid or ambiguous monetary values.; Vendor name is unknown or ambiguous; verify against master data.</td></tr></table></html>

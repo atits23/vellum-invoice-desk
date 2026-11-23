@@ -1,0 +1,20 @@
+services:
+  vellum:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      NODE_ENV: development
+      PUBLIC_URL: http://localhost:8000
+      BOOTSTRAP_ADMIN: ${BOOTSTRAP_ADMIN:-owner@example.com}
+      SMTP_URL: ${SMTP_URL:-}
+      MAIL_FROM: ${MAIL_FROM:-}
+    volumes:
+      - vellum-data:/data
+    restart: unless-stopped
+    mem_limit: 1200m
+    cpus: 2
+    security_opt:
+      - no-new-privileges:true
+volumes:
+  vellum-data:

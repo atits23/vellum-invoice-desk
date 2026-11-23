@@ -1,0 +1,17 @@
+.venv/
+.deps/
+data/
+tmp/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+*.log
+.pytest_cache/
+ASA Case Study*.pdf
+node_modules/
+.tools/
+playwright-report/
+test-results/
+reports/private/

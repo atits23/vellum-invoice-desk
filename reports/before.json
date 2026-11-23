@@ -1,0 +1,2996 @@
+{
+  "available": true,
+  "generated_at": "2026-11-22T19:22:13.153471+00:00",
+  "scope": "Controlled regression corpus plus three public fictional upstream test documents. Variants share templates and are not independent real-world samples. No claim of universal invoice accuracy. Ground truth is authored before execution.",
+  "total": 134,
+  "external_count": 3,
+  "synthetic_count": 131,
+  "decision_accuracy": 0.9776119402985075,
+  "false_approve_rate": 0.0,
+  "false_approve_count": 0,
+  "unsafe_input_count": 122,
+  "straight_through_rate": 0.08208955223880597,
+  "confusion_matrix": {
+    "APPROVED": {
+      "APPROVED": 11,
+      "REVIEW": 1,
+      "REJECTED": 0
+    },
+    "REVIEW": {
+      "APPROVED": 0,
+      "REVIEW": 114,
+      "REJECTED": 1
+    },
+    "REJECTED": {
+      "APPROVED": 0,
+      "REVIEW": 1,
+      "REJECTED": 6
+    }
+  },
+  "routing": {
+    "APPROVED": {
+      "precision": 1.0,
+      "recall": 0.9166666666666666
+    },
+    "REVIEW": {
+      "precision": 0.9827586206896551,
+      "recall": 0.991304347826087
+    },
+    "REJECTED": {
+      "precision": 0.8571428571428571,
+      "recall": 0.8571428571428571
+    }
+  },
+  "fields": {
+    "vendor": {
+      "correct": 123,
+      "total": 127,
+      "accuracy": 0.968503937007874
+    },
+    "tax_id": {
+      "correct": 127,
+      "total": 127,
+      "accuracy": 1.0
+    },
+    "invoice_number": {
+      "correct": 124,
+      "total": 127,
+      "accuracy": 0.9763779527559056
+    },
+    "invoice_date": {
+      "correct": 125,
+      "total": 127,
+      "accuracy": 0.984251968503937
+    },
+    "po_number": {
+      "correct": 120,
+      "total": 122,
+      "accuracy": 0.9836065573770492
+    },
+    "currency": {
+      "correct": 126,
+      "total": 130,
+      "accuracy": 0.9692307692307692
+    },
+    "subtotal": {
+      "correct": 126,
+      "total": 129,
+      "accuracy": 0.9767441860465116
+    },
+    "tax": {
+      "correct": 126,
+      "total": 128,
+      "accuracy": 0.984375
+    },
+    "total": {
+      "correct": 123,
+      "total": 127,
+      "accuracy": 0.968503937007874
+    },
+    "cgst": {
+      "correct": 9,
+      "total": 9,
+      "accuracy": 1.0
+    },
+    "sgst": {
+      "correct": 9,
+      "total": 9,
+      "accuracy": 1.0
+    },
+    "igst": {
+      "correct": 3,
+      "total": 3,
+      "accuracy": 1.0
+    },
+    "discount": {
+      "correct": 3,
+      "total": 3,
+      "accuracy": 1.0
+    },
+    "shipping": {
+      "correct": 3,
+      "total": 3,
+      "accuracy": 1.0
+    },
+    "round_off": {
+      "correct": 6,
+      "total": 6,
+      "accuracy": 1.0
+    },
+    "document_type": {
+      "correct": 6,
+      "total": 6,
+      "accuracy": 1.0
+    }
+  },
+  "latency_ms": {
+    "p50": 743.985,
+    "p95": 1480.71
+  },
+  "slices": {
+    "synthetic": {
+      "total": 131,
+      "decision_accuracy": 0.9847328244274809,
+      "field_accuracy": 0.9939862542955327
+    },
+    "external": {
+      "total": 3,
+      "decision_accuracy": 0.6666666666666666,
+      "field_accuracy": 0.10526315789473684
+    }
+  },
+  "modes": {
+    "ocr": {
+      "count": 48,
+      "decision_accuracy": 0.9791666666666666,
+      "mean_ocr_confidence": 0.9501041666666666,
+      "field_accuracy": 0.9770114942528736
+    },
+    "text": {
+      "count": 86,
+      "decision_accuracy": 0.9767441860465116,
+      "mean_ocr_confidence": 0.9595555555555555,
+      "field_accuracy": 0.9812834224598931
+    }
+  },
+  "failures": [
+    {
+      "file": "001-clean-1.pdf",
+      "expected": "APPROVED",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 1442.01,
+      "reason": "OCR requires source verification.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.964
+    },
+    {
+      "file": "non_invoice.pdf",
+      "expected": "REJECTED",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 713.64,
+      "reason": "Missing: vendor, invoice_number, invoice_date, currency, total; Invoice reference must contain letters or digits.; Currency: missing; Use valid ISO dates (YYYY-MM-DD).; Invalid or ambiguous monetary values.; Vendor name is unknown or ambiguous; verify against master data.",
+      "fields": {},
+      "ocr_confidence": null
+    },
+    {
+      "file": "external-SammyMaystoneLinesTest.png",
+      "expected": "REVIEW",
+      "actual": "REJECTED",
+      "mode": "ocr",
+      "group": "external",
+      "duration_ms": 1862.22,
+      "reason": "Document type: NON-INVOICE. Credit notes and proforma invoices need a separate verified workflow.; Missing: vendor, invoice_number, currency; Invoice reference must contain letters or digits.; Conflicting values: tax; OCR requires source verification.; Currency: missing; Invoices older than 365 days require review.; Invalid or ambiguous monetary values.; Vendor name is unknown or ambiguous; verify against master data.",
+      "fields": {
+        "invoice_number": false,
+        "invoice_date": true,
+        "total": true,
+        "currency": false,
+        "vendor": false
+      },
+      "ocr_confidence": 0.944
+    }
+  ],
+  "results": [
+    {
+      "file": "001-clean-0.pdf",
+      "expected": "APPROVED",
+      "actual": "APPROVED",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 762.69,
+      "reason": "",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "001-clean-1.pdf",
+      "expected": "APPROVED",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 1442.01,
+      "reason": "OCR requires source verification.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.964
+    },
+    {
+      "file": "001-clean-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1489.14,
+      "reason": "OCR requires source verification.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.953
+    },
+    {
+      "file": "002-missing_number-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 738.61,
+      "reason": "Missing: invoice_number; Invoice reference must contain letters or digits.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "002-missing_number-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 758.58,
+      "reason": "Missing: invoice_number; Invoice reference must contain letters or digits.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "002-missing_number-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1467.43,
+      "reason": "Missing: invoice_number; Invoice reference must contain letters or digits.; OCR requires source verification.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.956
+    },
+    {
+      "file": "003-missing_date-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 850.35,
+      "reason": "Missing: invoice_date; Use valid ISO dates (YYYY-MM-DD).",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "003-missing_date-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 703.39,
+      "reason": "Missing: invoice_date; Use valid ISO dates (YYYY-MM-DD).",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "003-missing_date-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1405.05,
+      "reason": "Missing: invoice_date; OCR requires source verification.; Use valid ISO dates (YYYY-MM-DD).",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.952
+    },
+    {
+      "file": "004-missing_total-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 711.22,
+      "reason": "Missing: total; Invalid or ambiguous monetary values.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "004-missing_total-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 727.52,
+      "reason": "Missing: total; Invalid or ambiguous monetary values.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "004-missing_total-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1420.29,
+      "reason": "Missing: total; OCR requires source verification.; Invalid or ambiguous monetary values.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true
+      },
+      "ocr_confidence": 0.951
+    },
+    {
+      "file": "005-missing_vendor-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 736.65,
+      "reason": "Missing: vendor; Vendor name variant matched by tax ID; verify legal name.",
+      "fields": {
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "005-missing_vendor-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 1386.95,
+      "reason": "Missing: vendor; OCR requires source verification.; Vendor name variant matched by tax ID; verify legal name.",
+      "fields": {
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.967
+    },
+    {
+      "file": "005-missing_vendor-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1468.32,
+      "reason": "Missing: vendor; OCR requires source verification.; Vendor name variant matched by tax ID; verify legal name.",
+      "fields": {
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.952
+    },
+    {
+      "file": "006-missing_po_unique-0.pdf",
+      "expected": "APPROVED",
+      "actual": "APPROVED",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 726.52,
+      "reason": "",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "006-missing_po_unique-1.pdf",
+      "expected": "APPROVED",
+      "actual": "APPROVED",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 733.66,
+      "reason": "",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "006-missing_po_unique-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1401.04,
+      "reason": "OCR requires source verification.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.956
+    },
+    {
+      "file": "007-po_typo-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 717.21,
+      "reason": "Explicit PO is unknown; no automatic substitution.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "007-po_typo-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 709.85,
+      "reason": "Explicit PO is unknown; no automatic substitution.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "007-po_typo-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1400.86,
+      "reason": "OCR requires source verification.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": false,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.953
+    },
+    {
+      "file": "008-ambiguous_po-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 709.06,
+      "reason": "2 eligible POs; an explicit reference is required.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "008-ambiguous_po-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 700.91,
+      "reason": "2 eligible POs; an explicit reference is required.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "008-ambiguous_po-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1392.59,
+      "reason": "OCR requires source verification.; 2 eligible POs; an explicit reference is required.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.957
+    },
+    {
+      "file": "009-arithmetic-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 705.78,
+      "reason": "Subtotal \u2212 discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "009-arithmetic-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 1309.23,
+      "reason": "OCR requires source verification.; Subtotal \u2212 discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.964
+    },
+    {
+      "file": "009-arithmetic-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1424.08,
+      "reason": "OCR requires source verification.; Subtotal \u2212 discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.952
+    },
+    {
+      "file": "010-tax_mixed-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 705.23,
+      "reason": "Use either IGST or CGST/SGST; components must sum to total tax.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "cgst": true,
+        "sgst": true,
+        "igst": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "010-tax_mixed-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 718.61,
+      "reason": "Use either IGST or CGST/SGST; components must sum to total tax.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "cgst": true,
+        "sgst": true,
+        "igst": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "010-tax_mixed-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1425.16,
+      "reason": "OCR requires source verification.; Use either IGST or CGST/SGST; components must sum to total tax.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "cgst": true,
+        "sgst": true,
+        "igst": true
+      },
+      "ocr_confidence": 0.95
+    },
+    {
+      "file": "011-gst_split-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 733.56,
+      "reason": "CGST and SGST must be equal within one cent.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "cgst": true,
+        "sgst": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "011-gst_split-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 710.8,
+      "reason": "CGST and SGST must be equal within one cent.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "cgst": true,
+        "sgst": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "011-gst_split-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1421.22,
+      "reason": "OCR requires source verification.; CGST and SGST must be equal within one cent.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "cgst": true,
+        "sgst": true
+      },
+      "ocr_confidence": 0.952
+    },
+    {
+      "file": "012-gst_valid-0.pdf",
+      "expected": "APPROVED",
+      "actual": "APPROVED",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 705.44,
+      "reason": "",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "cgst": true,
+        "sgst": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "012-gst_valid-1.pdf",
+      "expected": "APPROVED",
+      "actual": "APPROVED",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 709.76,
+      "reason": "",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "cgst": true,
+        "sgst": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "012-gst_valid-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1455.17,
+      "reason": "OCR requires source verification.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "cgst": true,
+        "sgst": true
+      },
+      "ocr_confidence": 0.951
+    },
+    {
+      "file": "013-adjustments-0.pdf",
+      "expected": "APPROVED",
+      "actual": "APPROVED",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 708.95,
+      "reason": "",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "discount": true,
+        "shipping": true,
+        "round_off": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "013-adjustments-1.pdf",
+      "expected": "APPROVED",
+      "actual": "APPROVED",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 705.11,
+      "reason": "",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "discount": true,
+        "shipping": true,
+        "round_off": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "013-adjustments-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1439.56,
+      "reason": "OCR requires source verification.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "discount": true,
+        "shipping": true,
+        "round_off": true
+      },
+      "ocr_confidence": 0.956
+    },
+    {
+      "file": "014-rounding_invalid-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 704.32,
+      "reason": "Subtotal \u2212 discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "round_off": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "014-rounding_invalid-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 707.8,
+      "reason": "Subtotal \u2212 discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "round_off": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "014-rounding_invalid-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1400.56,
+      "reason": "OCR requires source verification.; Subtotal \u2212 discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "round_off": true
+      },
+      "ocr_confidence": 0.954
+    },
+    {
+      "file": "015-credit_note-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 705.29,
+      "reason": "Document type: CREDIT NOTE. Credit notes and proforma invoices need a separate verified workflow.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "document_type": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "015-credit_note-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 713.76,
+      "reason": "Document type: CREDIT NOTE. Credit notes and proforma invoices need a separate verified workflow.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "document_type": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "015-credit_note-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1438.86,
+      "reason": "Document type: CREDIT NOTE. Credit notes and proforma invoices need a separate verified workflow.; OCR requires source verification.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "document_type": true
+      },
+      "ocr_confidence": 0.955
+    },
+    {
+      "file": "016-proforma-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 710.13,
+      "reason": "Document type: PROFORMA. Credit notes and proforma invoices need a separate verified workflow.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "document_type": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "016-proforma-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 706.63,
+      "reason": "Document type: PROFORMA. Credit notes and proforma invoices need a separate verified workflow.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "document_type": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "016-proforma-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1426.73,
+      "reason": "Document type: PROFORMA. Credit notes and proforma invoices need a separate verified workflow.; OCR requires source verification.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true,
+        "document_type": true
+      },
+      "ocr_confidence": 0.954
+    },
+    {
+      "file": "017-blocked_vendor-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 719.48,
+      "reason": "Vendor is blocked in procurement.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "017-blocked_vendor-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 1340.05,
+      "reason": "OCR requires source verification.; Vendor is blocked in procurement.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.964
+    },
+    {
+      "file": "017-blocked_vendor-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1412.76,
+      "reason": "OCR requires source verification.; Vendor is blocked in procurement.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.952
+    },
+    {
+      "file": "018-vendor_variant-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 730.06,
+      "reason": "Vendor name variant matched by tax ID; verify legal name.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "018-vendor_variant-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 698.19,
+      "reason": "Vendor name variant matched by tax ID; verify legal name.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "018-vendor_variant-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1390.76,
+      "reason": "OCR requires source verification.; Vendor name variant matched by tax ID; verify legal name.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.954
+    },
+    {
+      "file": "019-unknown_vendor-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 701.91,
+      "reason": "Vendor name is unknown or ambiguous; verify against master data.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "019-unknown_vendor-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 697.18,
+      "reason": "Vendor name is unknown or ambiguous; verify against master data.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "019-unknown_vendor-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1389.23,
+      "reason": "OCR requires source verification.; Vendor name is unknown or ambiguous; verify against master data.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.957
+    },
+    {
+      "file": "020-currency_mismatch-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 712.14,
+      "reason": "Invoice and PO currencies must match; no implicit FX conversion.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "020-currency_mismatch-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 698.97,
+      "reason": "Invoice and PO currencies must match; no implicit FX conversion.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "020-currency_mismatch-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1414.89,
+      "reason": "OCR requires source verification.; Invoice and PO currencies must match; no implicit FX conversion.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.953
+    },
+    {
+      "file": "021-unsupported_currency-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 702.28,
+      "reason": "Currency: JPY",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "021-unsupported_currency-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 1341.26,
+      "reason": "OCR requires source verification.; Currency: JPY",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.964
+    },
+    {
+      "file": "021-unsupported_currency-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1423.69,
+      "reason": "OCR requires source verification.; Currency: JPY",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.953
+    },
+    {
+      "file": "022-future_date-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 694.71,
+      "reason": "Invoice must not be future-dated; due date must follow invoice date.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "022-future_date-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 699.54,
+      "reason": "Invoice must not be future-dated; due date must follow invoice date.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "022-future_date-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1383.54,
+      "reason": "OCR requires source verification.; Invoice must not be future-dated; due date must follow invoice date.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.954
+    },
+    {
+      "file": "023-old_date-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 721.57,
+      "reason": "Invoices older than 365 days require review.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "023-old_date-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 696.25,
+      "reason": "Invoices older than 365 days require review.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "023-old_date-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1400.01,
+      "reason": "OCR requires source verification.; Invoices older than 365 days require review.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.954
+    },
+    {
+      "file": "024-invalid_date-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 706.47,
+      "reason": "Use valid ISO dates (YYYY-MM-DD).",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "024-invalid_date-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 688.95,
+      "reason": "Use valid ISO dates (YYYY-MM-DD).",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "024-invalid_date-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1394.64,
+      "reason": "OCR requires source verification.; Use valid ISO dates (YYYY-MM-DD).",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.954
+    },
+    {
+      "file": "025-closed_po-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 692.94,
+      "reason": "PO must be open.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "025-closed_po-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 1296.36,
+      "reason": "OCR requires source verification.; PO must be open.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.964
+    },
+    {
+      "file": "025-closed_po-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1455.24,
+      "reason": "OCR requires source verification.; PO must be open.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.953
+    },
+    {
+      "file": "026-wrong_vendor_po-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 833.94,
+      "reason": "PO must belong to the invoicing vendor.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "026-wrong_vendor_po-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 778.92,
+      "reason": "PO must belong to the invoicing vendor.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "026-wrong_vendor_po-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1463.6,
+      "reason": "OCR requires source verification.; PO must belong to the invoicing vendor.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.953
+    },
+    {
+      "file": "027-amount_over-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 751.27,
+      "reason": "Gross requested 1030.00; available 1020.00 USD. Cumulative excess 30.00 / 1000.00 = 3.00%; tolerance 2.0% or 0.00, whichever is greater.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "027-amount_over-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 734.05,
+      "reason": "Gross requested 1030.00; available 1020.00 USD. Cumulative excess 30.00 / 1000.00 = 3.00%; tolerance 2.0% or 0.00, whichever is greater.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "027-amount_over-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1415.88,
+      "reason": "OCR requires source verification.; Gross requested 1030.00; available 1020.00 USD. Cumulative excess 30.00 / 1000.00 = 3.00%; tolerance 2.0% or 0.00, whichever is greater.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.953
+    },
+    {
+      "file": "028-tolerance_boundary-0.pdf",
+      "expected": "APPROVED",
+      "actual": "APPROVED",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 718.45,
+      "reason": "",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "028-tolerance_boundary-1.pdf",
+      "expected": "APPROVED",
+      "actual": "APPROVED",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 715.92,
+      "reason": "",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "028-tolerance_boundary-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1397.34,
+      "reason": "OCR requires source verification.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.953
+    },
+    {
+      "file": "029-zero_total-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 714.96,
+      "reason": "Total must be positive; credit notes require a separate workflow.; Gross requested 0.00; available 1020.00 USD. Cumulative excess 0.00 / 1000.00 = 0.00%; tolerance 2.0% or 0.00, whichever is greater.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "029-zero_total-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 1323.95,
+      "reason": "OCR requires source verification.; Total must be positive; credit notes require a separate workflow.; Gross requested 0.00; available 1020.00 USD. Cumulative excess 0.00 / 1000.00 = 0.00%; tolerance 2.0% or 0.00, whichever is greater.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.962
+    },
+    {
+      "file": "029-zero_total-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1408.3,
+      "reason": "OCR requires source verification.; Total must be positive; credit notes require a separate workflow.; Gross requested 0.00; available 1020.00 USD. Cumulative excess 0.00 / 1000.00 = 0.00%; tolerance 2.0% or 0.00, whichever is greater.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.951
+    },
+    {
+      "file": "030-negative_total-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 715.64,
+      "reason": "Total must be positive; credit notes require a separate workflow.; Subtotal \u2212 discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).; Gross requested -600.00; available 1020.00 USD. Cumulative excess 0.00 / 1000.00 = 0.00%; tolerance 2.0% or 0.00, whichever is greater.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "030-negative_total-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 706.51,
+      "reason": "Total must be positive; credit notes require a separate workflow.; Subtotal \u2212 discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).; Gross requested -600.00; available 1020.00 USD. Cumulative excess 0.00 / 1000.00 = 0.00%; tolerance 2.0% or 0.00, whichever is greater.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "030-negative_total-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1389.3,
+      "reason": "OCR requires source verification.; Total must be positive; credit notes require a separate workflow.; Subtotal \u2212 discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).; Gross requested -600.00; available 1020.00 USD. Cumulative excess 0.00 / 1000.00 = 0.00%; tolerance 2.0% or 0.00, whichever is greater.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.943
+    },
+    {
+      "file": "031-invalid_money-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 709.98,
+      "reason": "Invalid or ambiguous monetary values.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "031-invalid_money-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 766.52,
+      "reason": "Invalid or ambiguous monetary values.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "031-invalid_money-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1423.25,
+      "reason": "OCR requires source verification.; Invalid or ambiguous monetary values.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.953
+    },
+    {
+      "file": "032-duplicate-0.pdf",
+      "expected": "REJECTED",
+      "actual": "REJECTED",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 714.95,
+      "reason": "Duplicate of run a6dd6c2ab2a04ff6b5877bb11364507b; Gross requested 600.00; available 420.00 USD. Cumulative excess 200.00 / 1000.00 = 20.00%; tolerance 2.0% or 0.00, whichever is greater.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "032-duplicate-1.pdf",
+      "expected": "REJECTED",
+      "actual": "REJECTED",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 718.26,
+      "reason": "Duplicate of run 05d74792296d4f3a8dcaebcb53c7cdb7; Gross requested 600.00; available 420.00 USD. Cumulative excess 200.00 / 1000.00 = 20.00%; tolerance 2.0% or 0.00, whichever is greater.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "032-duplicate-2.jpg",
+      "expected": "REJECTED",
+      "actual": "REJECTED",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1405.79,
+      "reason": "OCR requires source verification.; Duplicate of run c07b86f6bf8d40be82315c259b513c83; Gross requested 600.00; available 420.00 USD. Cumulative excess 200.00 / 1000.00 = 20.00%; tolerance 2.0% or 0.00, whichever is greater.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.953
+    },
+    {
+      "file": "033-split_balance-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 711.08,
+      "reason": "Gross requested 480.00; available 420.00 USD. Cumulative excess 80.00 / 1000.00 = 8.00%; tolerance 2.0% or 0.00, whichever is greater.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "033-split_balance-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 1347.52,
+      "reason": "OCR requires source verification.; Gross requested 480.00; available 420.00 USD. Cumulative excess 80.00 / 1000.00 = 8.00%; tolerance 2.0% or 0.00, whichever is greater.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.965
+    },
+    {
+      "file": "033-split_balance-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1392.25,
+      "reason": "OCR requires source verification.; Gross requested 480.00; available 420.00 USD. Cumulative excess 80.00 / 1000.00 = 8.00%; tolerance 2.0% or 0.00, whichever is greater.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.953
+    },
+    {
+      "file": "034-same_amount_other_number-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 712.04,
+      "reason": "Same vendor, date and amount with another reference; verify separate delivery.; Gross requested 600.00; available 420.00 USD. Cumulative excess 200.00 / 1000.00 = 20.00%; tolerance 2.0% or 0.00, whichever is greater.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "034-same_amount_other_number-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 724.1,
+      "reason": "Same vendor, date and amount with another reference; verify separate delivery.; Gross requested 600.00; available 420.00 USD. Cumulative excess 200.00 / 1000.00 = 20.00%; tolerance 2.0% or 0.00, whichever is greater.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "034-same_amount_other_number-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1394.0,
+      "reason": "OCR requires source verification.; Same vendor, date and amount with another reference; verify separate delivery.; Gross requested 600.00; available 420.00 USD. Cumulative excess 200.00 / 1000.00 = 20.00%; tolerance 2.0% or 0.00, whichever is greater.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.954
+    },
+    {
+      "file": "035-item_mismatch-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 722.6,
+      "reason": "Item 1: description match confidence 17%; threshold 85%. Curated synonyms plus lexical similarity, not an embedding model.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "035-item_mismatch-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 715.45,
+      "reason": "Item 1: description match confidence 17%; threshold 85%. Curated synonyms plus lexical similarity, not an embedding model.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "035-item_mismatch-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1446.84,
+      "reason": "OCR requires source verification.; Item 1: description match confidence 17%; threshold 85%. Curated synonyms plus lexical similarity, not an embedding model.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.94
+    },
+    {
+      "file": "036-item_unit-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 719.88,
+      "reason": "Unit box; PO unit each. No implicit unit conversion.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "036-item_unit-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 702.43,
+      "reason": "Unit box; PO unit each. No implicit unit conversion.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "036-item_unit-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1480.71,
+      "reason": "OCR requires source verification.; Unit box; PO unit each. No implicit unit conversion.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.944
+    },
+    {
+      "file": "037-item_valid-0.pdf",
+      "expected": "APPROVED",
+      "actual": "APPROVED",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 731.08,
+      "reason": "",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "037-item_valid-1.pdf",
+      "expected": "APPROVED",
+      "actual": "APPROVED",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 717.58,
+      "reason": "",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "037-item_valid-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1829.34,
+      "reason": "OCR requires source verification.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.953
+    },
+    {
+      "file": "038-item_price-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 756.14,
+      "reason": "Unit price 250; PO price 100.00.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "038-item_price-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 705.25,
+      "reason": "Unit price 250; PO price 100.00.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "038-item_price-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1482.7,
+      "reason": "OCR requires source verification.; Unit price 250; PO price 100.00.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.954
+    },
+    {
+      "file": "039-prompt_injection-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 710.59,
+      "reason": "Subtotal \u2212 discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).; Gross requested 9999.00; available 1020.00 USD. Cumulative excess 8999.00 / 1000.00 = 899.90%; tolerance 2.0% or 0.00, whichever is greater.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "039-prompt_injection-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 711.33,
+      "reason": "Subtotal \u2212 discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).; Gross requested 9999.00; available 1020.00 USD. Cumulative excess 8999.00 / 1000.00 = 899.90%; tolerance 2.0% or 0.00, whichever is greater.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "039-prompt_injection-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1516.2,
+      "reason": "OCR requires source verification.; Subtotal \u2212 discount + shipping + tax + round-off must equal total (one-cent tolerance; round-off capped at 1 currency unit).; Gross requested 9999.00; available 1020.00 USD. Cumulative excess 8999.00 / 1000.00 = 899.90%; tolerance 2.0% or 0.00, whichever is greater.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.956
+    },
+    {
+      "file": "040-conflicting_total-0.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 708.38,
+      "reason": "Conflicting values: total",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "040-conflicting_total-1.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 714.38,
+      "reason": "Conflicting values: total",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "040-conflicting_total-2.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1453.92,
+      "reason": "Conflicting values: total; OCR requires source verification.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.955
+    },
+    {
+      "file": "photo-blur.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1345.52,
+      "reason": "Missing: vendor, total; OCR requires source verification.; Currency: USO; Invalid or ambiguous monetary values.; Vendor name variant matched by tax ID; verify legal name.",
+      "fields": {
+        "vendor": false,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": false,
+        "subtotal": true,
+        "tax": true,
+        "total": false
+      },
+      "ocr_confidence": 0.847
+    },
+    {
+      "file": "photo-dark.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1408.57,
+      "reason": "OCR requires source verification.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.953
+    },
+    {
+      "file": "photo-skew.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1437.19,
+      "reason": "OCR requires source verification.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.949
+    },
+    {
+      "file": "photo-rotated.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1453.16,
+      "reason": "OCR requires source verification.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.953
+    },
+    {
+      "file": "photo-crop.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1240.03,
+      "reason": "Missing: total; OCR requires source verification.; Invalid or ambiguous monetary values.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": false,
+        "tax": false,
+        "total": false
+      },
+      "ocr_confidence": 0.948
+    },
+    {
+      "file": "photo-stamp.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1431.28,
+      "reason": "OCR requires source verification.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.953
+    },
+    {
+      "file": "photo-shadow.jpg",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "ocr",
+      "group": "synthetic",
+      "duration_ms": 1421.35,
+      "reason": "OCR requires source verification.",
+      "fields": {
+        "vendor": true,
+        "tax_id": true,
+        "invoice_number": true,
+        "invoice_date": true,
+        "po_number": true,
+        "currency": true,
+        "subtotal": true,
+        "tax": true,
+        "total": true
+      },
+      "ocr_confidence": 0.952
+    },
+    {
+      "file": "corrupt.pdf",
+      "expected": "REJECTED",
+      "actual": "REJECTED",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 691.37,
+      "reason": "Invalid or malformed document.",
+      "fields": {},
+      "ocr_confidence": null
+    },
+    {
+      "file": "encrypted.pdf",
+      "expected": "REJECTED",
+      "actual": "REJECTED",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 717.02,
+      "reason": "Password-protected PDF. Upload an unlocked copy.",
+      "fields": {},
+      "ocr_confidence": null
+    },
+    {
+      "file": "blank.pdf",
+      "expected": "REJECTED",
+      "actual": "REJECTED",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 1281.19,
+      "reason": "Blank or unreadable document; upload a clearer complete invoice.",
+      "fields": {},
+      "ocr_confidence": null
+    },
+    {
+      "file": "non_invoice.pdf",
+      "expected": "REJECTED",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "synthetic",
+      "duration_ms": 713.64,
+      "reason": "Missing: vendor, invoice_number, invoice_date, currency, total; Invoice reference must contain letters or digits.; Currency: missing; Use valid ISO dates (YYYY-MM-DD).; Invalid or ambiguous monetary values.; Vendor name is unknown or ambiguous; verify against master data.",
+      "fields": {},
+      "ocr_confidence": null
+    },
+    {
+      "file": "external-AzureInterior.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "external",
+      "duration_ms": 2306.32,
+      "reason": "Missing: vendor, invoice_number, currency, total; Invoice reference must contain letters or digits.; OCR requires source verification.; Currency: missing; Use valid ISO dates (YYYY-MM-DD).; Invalid or ambiguous monetary values.; Vendor name is unknown or ambiguous; verify against master data.",
+      "fields": {
+        "invoice_number": false,
+        "invoice_date": false,
+        "total": false,
+        "subtotal": false,
+        "currency": false,
+        "vendor": false
+      },
+      "ocr_confidence": 0.922
+    },
+    {
+      "file": "external-SammyMaystoneLinesTest.pdf",
+      "expected": "REVIEW",
+      "actual": "REVIEW",
+      "mode": "text",
+      "group": "external",
+      "duration_ms": 749.36,
+      "reason": "Missing: vendor, invoice_number, invoice_date, currency, total; Invoice reference must contain letters or digits.; Conflicting values: tax; Currency: missing; Use valid ISO dates (YYYY-MM-DD).; Invalid or ambiguous monetary values.; Vendor name is unknown or ambiguous; verify against master data.",
+      "fields": {
+        "invoice_number": false,
+        "invoice_date": false,
+        "total": false,
+        "subtotal": false,
+        "tax": false,
+        "currency": false,
+        "vendor": false,
+        "po_number": false
+      },
+      "ocr_confidence": null
+    },
+    {
+      "file": "external-SammyMaystoneLinesTest.png",
+      "expected": "REVIEW",
+      "actual": "REJECTED",
+      "mode": "ocr",
+      "group": "external",
+      "duration_ms": 1862.22,
+      "reason": "Document type: NON-INVOICE. Credit notes and proforma invoices need a separate verified workflow.; Missing: vendor, invoice_number, currency; Invoice reference must contain letters or digits.; Conflicting values: tax; OCR requires source verification.; Currency: missing; Invoices older than 365 days require review.; Invalid or ambiguous monetary values.; Vendor name is unknown or ambiguous; verify against master data.",
+      "fields": {
+        "invoice_number": false,
+        "invoice_date": true,
+        "total": true,
+        "currency": false,
+        "vendor": false
+      },
+      "ocr_confidence": 0.944
+    }
+  ]
+}

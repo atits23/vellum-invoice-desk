@@ -1,0 +1,12 @@
+.git
+.venv
+.deps
+data
+tmp
+__pycache__
+ASA Case Study*.pdf
+.env
+node_modules
+.tools
+playwright-report
+test-results
